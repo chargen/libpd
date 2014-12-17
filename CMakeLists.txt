@@ -7,6 +7,10 @@ set(libpd_wrapper_SOURCES
   libpd_wrapper/x_libpdreceive.c
   libpd_wrapper/z_libpd.c)
 
+set(cpp_SOURCES
+  cpp/PdBase.cpp
+  cpp/PdTypes.cpp )
+
 set(libpd_SOURCES 
   pure-data/src/d_soundfile.c 
   pure-data/src/g_readwrite.c  
@@ -84,13 +88,15 @@ set(libpd_SOURCES
 set(libpd_HEADERS libpd_wrapper/z_libpd.h
   pure-data/src/m_pd.h)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/cpp)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/pure-data/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libpd_wrapper)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libpd_wrapper/util)
 
 add_definitions(-DPD -DHAVE_UNISTD_H -DHAVE_LIBDL -DUSEAPI_DUMMY)
 set(CMAKE_C_FLAGS "-march=native -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast -fPIC")
 
-add_library(pd SHARED ${libpd_wrapper_SOURCES} ${libpd_SOURCES})
+add_library(pd SHARED ${libpd_wrapper_SOURCES} ${libpd_SOURCES} ${cpp_SOURCES})
 target_link_libraries(pd dl m pthread)
 
 #set_target_properties(pd PROPERTIES PUBLIC_HEADER "${libpd_HEADERS}")
