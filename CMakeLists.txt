@@ -1,11 +1,15 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 project(libpd)
-#include(options.cmake)
 
 set(libpd_wrapper_SOURCES
   libpd_wrapper/s_libpdmidi.c
   libpd_wrapper/x_libpdreceive.c
-  libpd_wrapper/z_libpd.c)
+  libpd_wrapper/z_libpd.c
+  libpd_wrapper/z_hooks.c
+  libpd_wrapper/util/z_print_util.c
+  libpd_wrapper/util/z_queued.c
+  libpd_wrapper/util/ringbuffer.c
+)
 
 set(cpp_SOURCES
   cpp/PdBase.cpp
