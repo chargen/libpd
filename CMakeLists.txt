@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 project(libpd)
 
+add_definitions(-DHAVE_ALLOCA=1 -DHAVE_ALLOCA_H=1)
+
 set(libpd_wrapper_SOURCES
   libpd_wrapper/s_libpdmidi.c
   libpd_wrapper/x_libpdreceive.c
